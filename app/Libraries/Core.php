@@ -1,7 +1,7 @@
 <?php
 namespace App\Libraries;
 
-use App\Libraries\Router;
+use App\Libraries\Route;
 
 
 
