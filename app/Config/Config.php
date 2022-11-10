@@ -9,7 +9,7 @@
 
     // Database parameters of SqlServer
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'hrm');
+    define('DB_NAME', 'your_db_name');
     define('DB_USER', 'root');
     define('DB_PASS', NULL);
 
@@ -20,8 +20,7 @@
     define('URLROOT', 'http://www.mvcbetter.gg/');
 
     //Sitename
-    define('SITENAME', 'HRM Demo');
+    define('SITENAME', 'Youre Site Name');
 
     define('SQLROOT', '../app/Sqlscripts/');
 
-    
