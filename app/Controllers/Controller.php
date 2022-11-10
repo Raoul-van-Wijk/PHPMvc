@@ -1,21 +1,15 @@
 <?php
-    //Load the model and the view
+namespace App\Controllers;
     class Controller 
     {
-        protected function model($model) : mixed
-        {
-            //Require model file
-            require_once '../app/Models/' . $model . '.php';
-
-            //Instantiate model
-            return new $model();
-        }
-
-        //Load the view (checks for the file)
         protected function view($view, $data = []) 
         {
             if (file_exists('../app/Views/' . $view . '.php')) 
             {
+                foreach ($data as $key => $value) 
+                {
+                    $$key = $value;
+                }
                 require_once '../app/Views/' . $view . '.php';
             } 
             else 
@@ -23,4 +17,5 @@
                 die("View does not exists.");
             }
         }
+
     }
