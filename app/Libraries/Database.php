@@ -1,4 +1,7 @@
 <?php
+namespace App\Libraries;
+
+use \PDO;
     class Database
     {
         private $dbHost = DB_HOST;
@@ -10,8 +13,11 @@
         private $dbHandler;
         private $error;
 
-        public function __construct()
+        public function __construct(string $dbName = null)
         {
+            if(!is_null($dbName)) {
+                $this->dbName = $dbName;
+            }
             $this->ConnectionMySql();
         }
 
