@@ -1,0 +1,19 @@
+<?php
+use App\Libraries\Route;
+
+
+function route($routeName, array | int $params = [])
+{
+    if(is_int($params)) {
+    $params = [$params];
+    }
+    return Route::getRoute($routeName, $params);
+}
+
+function dd(...$data)
+{
+  echo '<pre>';
+  var_dump($data);
+  echo '</pre>';
+  die();
+}
