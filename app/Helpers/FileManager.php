@@ -12,6 +12,9 @@ class FileManager
         case 'model':
           self::makeModel($name);
           break;
+        case 'request':
+          self::makeRequest($name);
+          break;
         default:
           echo "Invalid function";
           break;
@@ -35,6 +38,16 @@ class FileManager
       } else {
         echo "File created";
         fwrite(fopen("app/Models/" . $name . ".php", "w"), self::modelTemplate($name));
+      }
+    }
+
+    public static function makeRequest($name)
+    {
+      if(\file_exists("app/Requests/" . $name . ".php")) {
+        echo "File already exists";
+      } else {
+        echo "File created";
+        fwrite(fopen("app/Requests/" . $name . ".php", "w"), self::requestTemplate($name));
       }
     }
 
@@ -74,5 +87,38 @@ class '.$name.' extends Model
     parent::__construct("database name");
   }
 } ';
+    }
+
+    public static function requestTemplate($name)
+    {
+      return
+'<?php
+namespace App\Requests;
+
+use App\Requests\Request;
+
+class '.$name.' extends Request 
+{
+
+  /**
+   * Determine if the user is authorized to make this request.
+   * 
+   * @return bool
+   */
+  public function authorize()
+  {
+    return true;
+  }
+
+  /**
+   * Get the validation rules that apply to the request.
+   * 
+   * @return array
+   */
+  public function rules()
+  {
+    return [];
+  }
+}';
     }
 }
