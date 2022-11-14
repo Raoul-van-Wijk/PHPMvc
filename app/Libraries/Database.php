@@ -2,6 +2,7 @@
 namespace App\Libraries;
 
 use \PDO;
+use \PDOException;
     class Database
     {
         private $dbHost = DB_HOST;
