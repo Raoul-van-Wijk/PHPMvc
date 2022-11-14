@@ -17,3 +17,10 @@ function dd(...$data)
   echo '</pre>';
   die();
 }
+
+
+function csrf()
+{
+  $_SESSION['_token'] = bin2hex(random_bytes(32));
+  return '<input type="hidden" name="_token" value="' . $_SESSION['_token'] . '">';
+}
