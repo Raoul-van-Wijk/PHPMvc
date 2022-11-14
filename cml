@@ -2,33 +2,47 @@
 <?php 
 use App\Helpers\FileManager;
 
+require_once __DIR__ . '/app/Config/config.php';
 require_once __DIR__ . '/app/autoload.php';
 if(!isset($argv[1])) {
     echo "Please provide an action";
     exit;
 }
 
-if(!str_contains($argv[1], ':'))
-{
-    echo "Please use valid syntax", PHP_EOL,
-          "Example: php cml make:controller TestController";
+
+if($argv[1] == "serve") {
+    exec("php -S ". URLROOT ." -t public");
     exit;
+} else {
+    if(!str_contains($argv[1], ':'))
+    {
+        echo "Please use valid syntax", PHP_EOL,
+            "Example: php cml make:controller TestController";
+        exit;
+    }
+    
+    $function = explode(":", $argv[1]);
+    if($function[0] != 'make' || $function[1] != 'controller' && $function[1] != 'model' && $function[1] != 'request')
+    {
+        echo "Please use valid syntax ", PHP_EOL,
+            "For example: php cml make:controller TestController";
+        exit;
+    }
+    
+    if(!isset($argv[2])) {
+        echo "Please provide a name";
+        exit;
+    }
 }
 
-$function = explode(":", $argv[1]);
-if($function[0] != 'make' || $function[1] != 'controller' || $function[1] != 'model')
-{
-    echo "Please use valid syntax ", PHP_EOL,
-          "For example: php cml make:controller TestController";
-    exit;
-}
 
 
 
-if(!isset($argv[2])) {
-    echo "Please provide a name";
-    exit;
-  }
+
+
+
+
+
 
 $FileManager = new FileManager;
 call_user_func_array([$FileManager, $function[0]], [$function[1], $argv[2]]);
